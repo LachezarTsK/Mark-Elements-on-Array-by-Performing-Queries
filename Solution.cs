@@ -8,6 +8,7 @@ public class Solution
 
     private bool[]? markedElements;
     private long sumOfUnmarkedElements;
+
     public long[] UnmarkedSumArray(int[] input, int[][] queries)
     {
         Comparer<ElementData> comparator = Comparer<ElementData>
@@ -16,7 +17,7 @@ public class Solution
                           : x.value.CompareTo(y.value));
 
         PriorityQueue<ElementData, ElementData> minHeapForValue = new PriorityQueue<ElementData, ElementData>(comparator);
-        initializeMinHeapForValue(input, minHeapForValue);
+        InitializeMinHeapForValue(input, minHeapForValue);
 
         markedElements = new bool[input.Length];
         sumOfUnmarkedElements = 0;
@@ -31,14 +32,14 @@ public class Solution
 
         for (int i = 0; i < queries.Length && minHeapForValue.Count > 0; ++i)
         {
-            markElementsInQuery(queries[i], input, minHeapForValue);
+            MarkElementsInQuery(queries[i], input, minHeapForValue);
             sumOfUnmarkedElementsAfterEachQuery[indexAnswer++] = sumOfUnmarkedElements;
         }
 
         return sumOfUnmarkedElementsAfterEachQuery;
     }
 
-    private void markElementsInQuery(int[] query, int[] input, PriorityQueue<ElementData, ElementData> minHeapForValue)
+    private void MarkElementsInQuery(int[] query, int[] input, PriorityQueue<ElementData, ElementData> minHeapForValue)
     {
         int index = query[0];
         int numberOfSmallestValuesToMark = query[1];
@@ -61,7 +62,7 @@ public class Solution
         }
     }
 
-    private void initializeMinHeapForValue(int[] input, PriorityQueue<ElementData, ElementData> minHeapForValue)
+    private void InitializeMinHeapForValue(int[] input, PriorityQueue<ElementData, ElementData> minHeapForValue)
     {
         for (int i = 0; i < input.Length; ++i)
         {
