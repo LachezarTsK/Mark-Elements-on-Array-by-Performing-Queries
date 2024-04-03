@@ -27,21 +27,21 @@ class Solution {
 public:
     vector<long long> unmarkedSumArray(const vector<int>& input, const vector<vector<int>>& queries) {
 
-            MinHeapForValue minHeapForValue;
-            initializeMinHeapForValue(input, minHeapForValue);
+        MinHeapForValue minHeapForValue;
+        initializeMinHeapForValue(input, minHeapForValue);
 
-            markedElements.resize(input.size());
-            sumOfUnmarkedElements = accumulate(input.begin(), input.end(), static_cast<long long>(0));
+        markedElements.resize(input.size());
+        sumOfUnmarkedElements = accumulate(input.begin(), input.end(), static_cast<long long>(0));
 
-            vector<long long> sumOfUnmarkedElementsAfterEachQuery(queries.size());
-            int indexAnswer = 0;
+        vector<long long> sumOfUnmarkedElementsAfterEachQuery(queries.size());
+        int indexAnswer = 0;
 
-            for (size_t i = 0; i < queries.size() && !minHeapForValue.empty(); ++i) {
-                markElementsInQuery(queries[i], input, minHeapForValue);
-                sumOfUnmarkedElementsAfterEachQuery[indexAnswer++] = sumOfUnmarkedElements;
-            }
+        for (size_t i = 0; i < queries.size() && !minHeapForValue.empty(); ++i) {
+            markElementsInQuery(queries[i], input, minHeapForValue);
+            sumOfUnmarkedElementsAfterEachQuery[indexAnswer++] = sumOfUnmarkedElements;
+        }
 
-            return sumOfUnmarkedElementsAfterEachQuery;
+        return sumOfUnmarkedElementsAfterEachQuery;
     }
 
 private:
